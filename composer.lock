@@ -4,20 +4,20 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5f92dd54b87eb6595e2371a9595ee1e0",
+    "hash": "40b5ae1ba739cbc17b568d11e8c7b31b",
     "packages": [
         {
             "name": "brightnucleus/exceptions",
-            "version": "v0.1.0",
+            "version": "v0.2.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/brightnucleus/exceptions.git",
-                "reference": "aa65d1b7a13776cb3bebd9c93f0543cb0ae66900"
+                "reference": "1ef7a33796067e21f67c5c34525432c7a1f44c41"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/brightnucleus/exceptions/zipball/aa65d1b7a13776cb3bebd9c93f0543cb0ae66900",
-                "reference": "aa65d1b7a13776cb3bebd9c93f0543cb0ae66900",
+                "url": "https://api.github.com/repos/brightnucleus/exceptions/zipball/1ef7a33796067e21f67c5c34525432c7a1f44c41",
+                "reference": "1ef7a33796067e21f67c5c34525432c7a1f44c41",
                 "shasum": ""
             },
             "require-dev": {
@@ -41,7 +41,7 @@
                 }
             ],
             "description": "Exceptions shared across Bright Nucleus components.",
-            "time": "2016-02-16 17:48:47"
+            "time": "2016-02-18 09:40:22"
         }
     ],
     "packages-dev": [
