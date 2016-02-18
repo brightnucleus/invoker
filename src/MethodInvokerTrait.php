@@ -50,8 +50,8 @@ trait MethodInvokerTrait
             $pass       = array();
 
             foreach ($reflection->getParameters() as $param) {
-                if (array_key_exists($param->getName(), $args)) {
-                    $pass[] = $args[$param->getName()];
+                if (array_key_exists($param->name, $args)) {
+                    $pass[] = $args[$param->name];
                 } else {
                     $pass[] = $param->getDefaultValue();
                 }
