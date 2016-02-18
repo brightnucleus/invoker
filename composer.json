@@ -13,7 +13,7 @@
     }
   ],
   "require": {
-    "brightnucleus/exceptions": "0.1.*"
+    "brightnucleus/exceptions": "^0.2"
   },
   "autoload": {
     "psr-4": {
