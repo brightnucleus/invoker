@@ -46,16 +46,13 @@ trait MethodInvokerTrait
         }
 
         try {
-            $reflection = new ReflectionMethod(get_class($object), $method);
-            $pass       = array();
+            $reflection        = new ReflectionMethod(get_class($object), $method);
+            $ordered_arguments = Helper::parse_params(
+                $reflection->getParameters(),
+                $args
+            );
 
-            foreach ($reflection->getParameters() as $param) {
-                $pass[] = array_key_exists($param->name, $args)
-                    ? $args[$param->name]
-                    : $param->getDefaultValue();
-            }
-
-            return $reflection->invokeArgs($object, $pass);
+            return $reflection->invokeArgs($object, $ordered_arguments);
         } catch (Exception $exception) {
             throw new InvalidArgumentException(
                 sprintf(
