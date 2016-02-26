@@ -112,7 +112,7 @@ class FunctionInvokerTraitTest extends \PHPUnit_Framework_TestCase
             'BrightNucleus\Exception\InvalidArgumentException',
             'Missing valid function to invoke.'
         );
-        $result = $this->invokeFunction(null, $array);
+        $this->invokeFunction(null, $array);
     }
 
     /**
@@ -127,7 +127,7 @@ class FunctionInvokerTraitTest extends \PHPUnit_Framework_TestCase
             'BrightNucleus\Exception\InvalidArgumentException',
             'Missing valid function to invoke.'
         );
-        $result = $this->invokeFunction(25, $array);
+        $this->invokeFunction(25, $array);
     }
 
     /**
@@ -142,7 +142,7 @@ class FunctionInvokerTraitTest extends \PHPUnit_Framework_TestCase
             'BrightNucleus\Exception\InvalidArgumentException',
             'Failed to invoke function "unknownFunction".'
         );
-        $result = $this->invokeFunction('unknownFunction', $array);
+        $this->invokeFunction('unknownFunction', $array);
     }
 
     /**
@@ -157,6 +157,6 @@ class FunctionInvokerTraitTest extends \PHPUnit_Framework_TestCase
             'BrightNucleus\Exception\InvalidArgumentException',
             'Failed to invoke function "BrightNucleus\Invoker\dumpFunction".'
         );
-        $result = $this->invokeFunction('BrightNucleus\Invoker\dumpFunction', $array);
+        $this->invokeFunction('BrightNucleus\Invoker\dumpFunction', $array);
     }
 }
