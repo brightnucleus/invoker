@@ -49,11 +49,9 @@ trait FunctionInvokerTrait
             $pass       = array();
 
             foreach ($reflection->getParameters() as $param) {
-                if (array_key_exists($param->name, $args)) {
-                    $pass[] = $args[$param->name];
-                } else {
-                    $pass[] = $param->getDefaultValue();
-                }
+                $pass[] = array_key_exists($param->name, $args)
+                    ? $args[$param->name]
+                    : $param->getDefaultValue();
             }
 
             return $reflection->invokeArgs($pass);

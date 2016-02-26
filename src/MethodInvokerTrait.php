@@ -38,7 +38,7 @@ trait MethodInvokerTrait
      * @return mixed          Return value of the invoked method.
      * @throws InvalidArgumentException If a valid method is missing.
      */
-    public function invokeMethod($object, $method, array $args = [])
+    protected function invokeMethod($object, $method, array $args = [])
     {
 
         if (! $method || ! is_string($method) || '' === $method) {
@@ -50,11 +50,9 @@ trait MethodInvokerTrait
             $pass       = array();
 
             foreach ($reflection->getParameters() as $param) {
-                if (array_key_exists($param->name, $args)) {
-                    $pass[] = $args[$param->name];
-                } else {
-                    $pass[] = $param->getDefaultValue();
-                }
+                $pass[] = array_key_exists($param->name, $args)
+                    ? $args[$param->name]
+                    : $param->getDefaultValue();
             }
 
             return $reflection->invokeArgs($object, $pass);
