@@ -11,6 +11,7 @@
 
 namespace BrightNucleus\Invoker;
 
+use BrightNucleus\Exception\RuntimeException;
 use ReflectionParameter;
 
 /**
@@ -32,12 +33,21 @@ class Helper
      * @param ReflectionParameter[] $params The reflection parameters to parse.
      * @param array                 $args   The arguments to check against.
      * @return array The correctly ordered arguments to pass to the reflected callable.
+     * @throws RuntimeException If a $param does not have a name() method.
      */
-    public static function parse_params(array $params, $args)
+    public static function parseParams(array $params, $args)
     {
         $ordered_args = array();
 
         foreach ($params as $param) {
+            if (! $param instanceof ReflectionParameter) {
+                throw new RuntimeException(
+                    sprintf(
+                        _('Parameter %1$s is not an instance of ReflectionParameter.'),
+                        $param
+                    )
+                );
+            }
             $ordered_args[] = array_key_exists($param->name, $args)
                 ? $args[$param->name]
                 : $param->getDefaultValue();

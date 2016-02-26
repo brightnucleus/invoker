@@ -47,7 +47,7 @@ trait MethodInvokerTrait
 
         try {
             $reflection        = new ReflectionMethod(get_class($object), $method);
-            $ordered_arguments = Helper::parse_params(
+            $ordered_arguments = Helper::parseParams(
                 $reflection->getParameters(),
                 $args
             );

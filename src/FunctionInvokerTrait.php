@@ -46,7 +46,7 @@ trait FunctionInvokerTrait
 
         try {
             $reflection        = new ReflectionFunction($function);
-            $ordered_arguments = Helper::parse_params(
+            $ordered_arguments = Helper::parseParams(
                 $reflection->getParameters(),
                 $args
             );
