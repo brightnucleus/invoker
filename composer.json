@@ -5,7 +5,7 @@
     "phpunit/phpunit": "~4",
     "squizlabs/php_codesniffer": "~2.5"
   },
-  "license": "GPL-2.0+",
+  "license": "MIT",
   "authors": [
     {
       "name": "Alain Schlesser",
@@ -13,7 +13,7 @@
     }
   ],
   "require": {
-    "brightnucleus/exceptions": "^0.2"
+    "brightnucleus/exceptions": ">=0.2"
   },
   "autoload": {
     "psr-4": {
