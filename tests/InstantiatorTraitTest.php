@@ -9,32 +9,10 @@
  * @copyright 2015-2016 Alain Schlesser, Bright Nucleus
  */
 
-namespace BrightNucleus\Invoker;
+namespace BrightNucleus\Invoker\Tests;
 
-
-class TestClass
-{
-
-    protected $argA;
-    protected $argB;
-    protected $argC;
-
-    public function __construct($argA, $argB, $argC = null)
-    {
-        $this->argA = $argA;
-        $this->argB = $argB;
-        $this->argC = $argC;
-    }
-
-    public function get()
-    {
-        return [
-            'argA' => $this->argA,
-            'argB' => $this->argB,
-            'argC' => $this->argC,
-        ];
-    }
-}
+use BrightNucleus\Exception\InvalidArgumentException;
+use BrightNucleus\Invoker\InstantiatorTrait;
 
 /**
  * Class InstantiatorTraitTest.
@@ -44,7 +22,7 @@ class TestClass
  * @package BrightNucleus\Exception
  * @author  Alain Schlesser <alain.schlesser@gmail.com>
  */
-class InstantiatorTraitTest extends \PHPUnit_Framework_TestCase
+class InstantiatorTraitTest extends TestCase
 {
 
     use InstantiatorTrait;
@@ -61,7 +39,7 @@ class InstantiatorTraitTest extends \PHPUnit_Framework_TestCase
      */
     public function testInstantiateClassMethod(array $array, $expected)
     {
-        $result = $this->instantiateClass(TestClass::class, $array);
+        $result = $this->instantiateClass(Fixtures\TestClass::class, $array);
         $this->assertEquals($expected, $result->get());
     }
 
@@ -116,10 +94,8 @@ class InstantiatorTraitTest extends \PHPUnit_Framework_TestCase
     public function testInstantiateClassMethodThrowsExceptionOnMissingArgument()
     {
         $array = ['argA' => 'valA', 'argX' => 'valX', 'argY' => 'valY', 'argZ' => 'valZ'];
-        $this->setExpectedException(
-            'BrightNucleus\Exception\InvalidArgumentException',
-            'Failed to instantiate class "BrightNucleus\Invoker\TestClass"'
-        );
-        $this->instantiateClass(TestClass::class, $array);
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Failed to instantiate class "BrightNucleus\Invoker\Tests\Fixtures\TestClass"');
+        $this->instantiateClass(Fixtures\TestClass::class, $array);
     }
 }

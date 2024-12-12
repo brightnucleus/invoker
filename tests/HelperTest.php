@@ -9,9 +9,10 @@
  * @copyright 2015-2016 Alain Schlesser, Bright Nucleus
  */
 
-namespace BrightNucleus\Invoker;
+namespace BrightNucleus\Invoker\Tests;
 
-
+use BrightNucleus\Invoker\Helper;
+use ReflectionException;
 use ReflectionFunction;
 
 /**
@@ -39,7 +40,7 @@ function helperFunction($argA, $argB, $argC = null)
  * @package BrightNucleus\Exception
  * @author  Alain Schlesser <alain.schlesser@gmail.com>
  */
-class HelperTest extends \PHPUnit_Framework_TestCase
+class HelperTest extends TestCase
 {
 
     /**
@@ -54,7 +55,7 @@ class HelperTest extends \PHPUnit_Framework_TestCase
      */
     public function testParseParams(array $array, $expected)
     {
-        $reflection = new ReflectionFunction('BrightNucleus\Invoker\helperFunction');
+        $reflection = new ReflectionFunction('BrightNucleus\Invoker\Tests\helperFunction');
         $result     = Helper::parseParams($reflection->getParameters(), $array);
         $this->assertEquals($expected, $result);
     }
@@ -110,11 +111,9 @@ class HelperTest extends \PHPUnit_Framework_TestCase
     public function testParseParamsThrowsExceptionOnMissingArguments()
     {
         $array      = [];
-        $reflection = new ReflectionFunction('BrightNucleus\Invoker\helperFunction');
-        $this->setExpectedException(
-            'ReflectionException',
-            'Internal error: Failed to retrieve the default value'
-        );
+        $reflection = new ReflectionFunction('BrightNucleus\Invoker\Tests\helperFunction');
+        $this->expectException(ReflectionException::class);
+        $this->expectExceptionMessage('Internal error: Failed to retrieve the default value');
         Helper::parseParams($reflection->getParameters(), $array);
     }
 
@@ -126,11 +125,9 @@ class HelperTest extends \PHPUnit_Framework_TestCase
     public function testParseParamsThrowsExceptionOnWrongArguments()
     {
         $array      = ['argNonSense' => 'Nonsense'];
-        $reflection = new ReflectionFunction('BrightNucleus\Invoker\helperFunction');
-        $this->setExpectedException(
-            'ReflectionException',
-            'Internal error: Failed to retrieve the default value'
-        );
+        $reflection = new ReflectionFunction('BrightNucleus\Invoker\Tests\helperFunction');
+        $this->expectException(ReflectionException::class);
+        $this->expectExceptionMessage('Internal error: Failed to retrieve the default value');
         Helper::parseParams($reflection->getParameters(), $array);
     }
 }

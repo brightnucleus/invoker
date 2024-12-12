@@ -9,8 +9,10 @@
  * @copyright 2015-2016 Alain Schlesser, Bright Nucleus
  */
 
-namespace BrightNucleus\Invoker;
+namespace BrightNucleus\Invoker\Tests;
 
+use BrightNucleus\Exception\InvalidArgumentException;
+use BrightNucleus\Invoker\MethodInvokerTrait;
 
 /**
  * Class MethodInvokerTraitTest.
@@ -20,7 +22,7 @@ namespace BrightNucleus\Invoker;
  * @package BrightNucleus\Exception
  * @author  Alain Schlesser <alain.schlesser@gmail.com>
  */
-class MethodInvokerTraitTest extends \PHPUnit_Framework_TestCase
+class MethodInvokerTraitTest extends TestCase
 {
 
     use MethodInvokerTrait;
@@ -109,10 +111,8 @@ class MethodInvokerTraitTest extends \PHPUnit_Framework_TestCase
     public function testInvokeMethodThrowsExceptionOnMissingMethod()
     {
         $array = ['argA' => 'valA', 'argX' => 'valX', 'argY' => 'valY', 'argZ' => 'valZ'];
-        $this->setExpectedException(
-            'BrightNucleus\Exception\InvalidArgumentException',
-            'Missing valid method to invoke.'
-        );
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Missing valid method to invoke.');
         $this->invokeMethod($this, null, $array);
     }
 
@@ -124,10 +124,8 @@ class MethodInvokerTraitTest extends \PHPUnit_Framework_TestCase
     public function testInvokeMethodThrowsExceptionOnInvalidMethod()
     {
         $array = ['argA' => 'valA', 'argX' => 'valX', 'argY' => 'valY', 'argZ' => 'valZ'];
-        $this->setExpectedException(
-            'BrightNucleus\Exception\InvalidArgumentException',
-            'Missing valid method to invoke.'
-        );
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Missing valid method to invoke.');
         $this->invokeMethod($this, 25, $array);
     }
 
@@ -139,9 +137,9 @@ class MethodInvokerTraitTest extends \PHPUnit_Framework_TestCase
     public function testInvokeMethodThrowsExceptionOnUnknownMethod()
     {
         $array = ['argA' => 'valA', 'argX' => 'valX', 'argY' => 'valY', 'argZ' => 'valZ'];
-        $this->setExpectedException(
-            'BrightNucleus\Exception\InvalidArgumentException',
-            'Failed to invoke method "unknownMethod" of class "BrightNucleus\Invoker\MethodInvokerTraitTest".'
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(
+            'Failed to invoke method "unknownMethod" of class "BrightNucleus\Invoker\Tests\MethodInvokerTraitTest".'
         );
         $this->invokeMethod($this, 'unknownMethod', $array);
     }
@@ -154,9 +152,9 @@ class MethodInvokerTraitTest extends \PHPUnit_Framework_TestCase
     public function testInvokeMethodThrowsExceptionOnMissingArgument()
     {
         $array = ['argA' => 'valA', 'argX' => 'valX', 'argY' => 'valY', 'argZ' => 'valZ'];
-        $this->setExpectedException(
-            'BrightNucleus\Exception\InvalidArgumentException',
-            'Failed to invoke method "dumpMethod" of class "BrightNucleus\Invoker\MethodInvokerTraitTest".'
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage(
+            'Failed to invoke method "dumpMethod" of class "BrightNucleus\Invoker\Tests\MethodInvokerTraitTest".'
         );
         $this->invokeMethod($this, 'dumpMethod', $array);
     }
